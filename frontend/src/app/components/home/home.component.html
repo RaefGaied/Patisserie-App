@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 class="my-4">Nos Pâtisseries</h1>
+
+  <!-- Sélecteur du nombre d’articles par page -->
+  <div class="mb-3">
+    <label for="itemsPerPage">Articles par page :</label>
+    <select id="itemsPerPage" class="form-select w-auto d-inline-block ms-2" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+      <option [value]="3">3</option>
+      <option [value]="6">6</option>
+      <option [value]="9">9</option>
+      <option [value]="12">12</option>
+    </select>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let article of articles">
+      <div class="card h-100">
+        <img [src]="article.imageUrl" class="card-img-top img-fluid article-image" [alt]="article.name">
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ article.name }}</h5>
+          <p class="card-text">{{ article.description }}</p>
+          <p class="card-text">
+            <span class="price">{{ article.price | currency:'EUR':'symbol':'1.2-2' }}</span>
+          </p>
+          <button class="btn btn-primary mt-auto" (click)="addToCart(article)">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <nav *ngIf="totalPages > 1" aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="changePage(currentPage - 1)">Précédent</button>
+      </li>
+
+      <li 
+        class="page-item" 
+        *ngFor="let page of [].constructor(totalPages); let i = index" 
+        [class.active]="currentPage === i + 1"
+      >
+        <button class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="changePage(currentPage + 1)">Suivant</button>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,48 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-link.active {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: auto;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-top: 1rem;
+  }
+  
+  footer .row {
+    text-align: center;
+  }
+  
+  footer .col-md-3 {
+    margin-top: 1.5rem;
+  }
+}

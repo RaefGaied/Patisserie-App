@@ -1,0 +1,108 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Inscription</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Message d'erreur -->
+            <div class="alert alert-danger" *ngIf="error">
+              {{ error }}
+            </div>
+
+            <!-- Nom d'utilisateur -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Nom d'utilisateur</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                formControlName="username"
+                [ngClass]="{'is-invalid': registerForm.get('username')?.invalid && registerForm.get('username')?.touched}"
+              >
+              <div class="invalid-feedback" *ngIf="registerForm.get('username')?.errors?.['required']">
+                Le nom d'utilisateur est requis
+              </div>
+              <div class="invalid-feedback" *ngIf="registerForm.get('username')?.errors?.['minlength']">
+                Le nom d'utilisateur doit contenir au moins 3 caractères
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}"
+              >
+              <div class="invalid-feedback" *ngIf="registerForm.get('email')?.errors?.['required']">
+                L'email est requis
+              </div>
+              <div class="invalid-feedback" *ngIf="registerForm.get('email')?.errors?.['email']">
+                Veuillez entrer une adresse email valide
+              </div>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
+              >
+              <div class="invalid-feedback" *ngIf="registerForm.get('password')?.errors?.['required']">
+                Le mot de passe est requis
+              </div>
+              <div class="invalid-feedback" *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                Le mot de passe doit contenir au moins 6 caractères
+              </div>
+            </div>
+
+            <!-- Confirmation du mot de passe -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                [ngClass]="{'is-invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}"
+              >
+              <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
+                La confirmation du mot de passe est requise
+              </div>
+              <div class="invalid-feedback" *ngIf="registerForm.errors?.['mismatch']">
+                Les mots de passe ne correspondent pas
+              </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="registerForm.invalid || loading"
+              >
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                S'inscrire
+              </button>
+            </div>
+          </form>
+
+          <!-- Lien vers la connexion -->
+          <div class="text-center mt-3">
+            <p>Déjà inscrit ? <a routerLink="/login">Connectez-vous</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

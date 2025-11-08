@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-2 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+  <div class="container">
+    <!-- Brand with animated hover -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-2">
+        <i class="fa fa-birthday-cake text-white"></i>
+      </div>
+      <h1 class="text-primary m-0 fs-4">Pâtisserie</h1>
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item mx-lg-1">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fa fa-home me-1"></i> Accueil
+          </a>
+        </li>
+        <li class="nav-item mx-lg-1">
+          <a class="nav-link" routerLink="/articles" routerLinkActive="active">
+            <i class="fa fa-bread-slice me-1"></i> Articles
+          </a>
+        </li>
+        <li class="nav-item mx-lg-1">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">
+            <i class="fa fa-info-circle me-1"></i> À propos
+          </a>
+        </li>
+        <li class="nav-item mx-lg-1">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+            <i class="fa fa-envelope me-1"></i> Contact
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+      
+        <ng-container *ngIf="!isAuthenticated">
+          <li class="nav-item mx-lg-1">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">
+              <i class="fa fa-user-plus me-1"></i> Inscription
+            </a>
+          </li>
+          <li class="nav-item mx-lg-1">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">
+              <i class="fa fa-sign-in-alt me-1"></i> Connexion
+            </a>
+          </li>
+        </ng-container>
+
+        <li class="nav-item mx-lg-1 dropdown" *ngIf="isAuthenticated && isAdmin">
+          <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="fa fa-user-shield me-1"></i> Admin
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" routerLink="/admin/dashboard"><i class="fa fa-tachometer-alt me-1"></i> Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/admin/articles"><i class="fa fa-list me-1"></i> Gestion Articles</a></li>
+          </ul>
+        </li>
+
+        
+        <li class="nav-item mx-lg-1" *ngIf="isAuthenticated">
+          <a class="nav-link" (click)="onLogout()">
+            <i class="fa fa-sign-out-alt me-1"></i> Déconnexion
+          </a>
+        </li>
+
+    
+        <li class="nav-item d-none d-lg-block ms-2">
+          <a class="btn btn-primary rounded-pill px-3 py-2" routerLink="/contact">
+            <i class="fa fa-phone-alt me-1"></i> Contact rapide
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
